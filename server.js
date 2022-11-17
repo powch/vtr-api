@@ -14,6 +14,8 @@ app.use(bodyParser.json());
 // Add API routes
 app.use(routes);
 
+console.log("ipb: ", process.env.IPB_HTTP)
+
 mongoose.connect("" + process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.listen(PORT, () =>
