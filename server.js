@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const routes = require("./routes");
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
@@ -11,10 +10,13 @@ require("dotenv").config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Add API routes
-app.use(routes);
+// Serve up static assets (usually on heroku)
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/dist"));
+// }
 
-console.log("ipb: ", process.env.IPB_HTTP)
+// Add routes, both API and view
+app.use(routes);
 
 mongoose.connect("" + process.env.MONGODB_URI, { useNewUrlParser: true });
 
