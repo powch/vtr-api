@@ -1,7 +1,12 @@
 export const theme = {
-  primary: "#0168EB",
-  primaryDarker: "#002E6B",
-  fontColor: "white",
+  primaryA: "#30475E",
+  primaryADarker: "#222831",
+  primaryB: "#F05454",
+  primaryC: "#DDDDDD",
+  border: "#ebebeb",
+  backgroundColor: "#fafafa",
+  fontDark: "#444",
+  fontLight: "#fafafa",
   label: {
     fontSize: "0.875rem",
     fontWeight: "bold",

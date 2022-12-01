@@ -1,8 +1,6 @@
 import set from "lodash.set";
 
-import {
-  PAGE_LOGIN,
-} from "./constants";
+import { PAGE_LOGIN } from "./constants";
 
 export const initialState = {
   currentPage: PAGE_LOGIN,
@@ -11,6 +9,10 @@ export const initialState = {
 
 export const reducer = (state, data) => {
   const { action, payload } = data;
+
+  if (action.includes("SEED_USER_DATA")) {
+    console.log({ action, payload });
+  }
 
   // ADD AN ERROR STATE, YOU TROGLODYTE
 

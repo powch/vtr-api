@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledButton = styled.button(({ theme, size, css }) => ({
   ...theme.roundedCorners,
   border: 0,
-  backgroundColor: theme.primary,
+  backgroundColor: theme.primaryA,
   color: theme.fontColor,
   ...(size === "large"
     ? {
@@ -18,8 +18,8 @@ const StyledButton = styled.button(({ theme, size, css }) => ({
       }
     : size === "small"
     ? {
-        width: "5rem",
-        height: "1.5rem",
+        width: "3rem",
+        height: "2rem",
       }
     : {}),
   ...css,

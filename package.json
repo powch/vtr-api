@@ -8,7 +8,8 @@
     "node": "18.12.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "clean": "rm -rf node_modules && npm i && cd client && rm -rf node_modules && rm -rf dist && npm i && npm run dev"
   },
   "author": "",
   "license": "ISC",

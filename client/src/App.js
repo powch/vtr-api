@@ -7,7 +7,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { theme } from "./theme";
 import { initialState, reducer } from "./App.reducer";
 import { authDomain, authClientId } from "./constants";
-import LoginScreen from "./views/LoginScreen/LoginScreen";
+import PageShell from "./components/PageShell";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: Ariel, sans-serif;
+    font-family: 'Figtree', sans-serif;
     width: 100%;
     overflow: auto;
   }
@@ -66,13 +66,14 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const AppContainer = styled.div({
+const AppContainer = styled.div(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   overflow: "hidden",
   minHeight: "100vh",
-  backgroundColor: "#F5F5F5",
-});
+  maxHeight: "100vh",
+  backgroundColor: theme.backgroundColor,
+}));
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -88,7 +89,11 @@ const App = () => {
     >
       <GlobalStyles />
       <ThemeProvider theme={theme}>
-
+        <AppContainer id="app-container">
+          <PageShell appState={{state, dispatch}}>
+            <h1>Foo</h1>
+          </PageShell>
+        </AppContainer>
       </ThemeProvider>
     </Auth0Provider>
   );
