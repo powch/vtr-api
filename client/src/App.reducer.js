@@ -1,5 +1,3 @@
-import set from "lodash.set";
-
 import { PAGE_LOGIN } from "./constants";
 
 export const initialState = {
@@ -11,7 +9,17 @@ export const reducer = (state, data) => {
   const { action, payload } = data;
 
   if (action.includes("SEED_USER_DATA")) {
-    console.log({ action, payload });
+    return {
+      ...state,
+      user: {
+        ...payload.user,
+        role: payload.permissions.find(
+          (permission) => permission === "access:dashboard"
+        )
+          ? "admin"
+          : "user",
+      },
+    };
   }
 
   // ADD AN ERROR STATE, YOU TROGLODYTE
