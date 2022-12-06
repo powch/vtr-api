@@ -11,11 +11,6 @@ module.exports = {
       { page: 1, limit: 10, sort: { dateAdded: -1 } }
     ).catch((err) => res.status(422).json(err));
 
-    const gearData = await db.Gear.paginate(
-      {},
-      { page: 1, limit: 10, sort: { dateAdded: -1 } }
-    ).catch((err) => res.status(422).json(err));
-
-    return res.json({ userData, assetData, gearData });
+    return res.json({ userData, assetData });
   },
 };

@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 
 const GetAssetData = ({ state, onData, onError, children }) => {
-  const { user } = state;
+  const { pagination, assetList } = state;
+  const { nextPage } = pagination || {};
 
-  const userId = user.sub.split("|")[1];
-
-  const url = `/api/assets/${userId}`;
+  const url = `/api/assets/`;
+  const body = JSON.stringify({ page: assetList.length ? nextPage : 1 });
 
   useEffect(() => {
     fetch(url, {
-      method: "GET",
-      body: {
-        page: 1,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
+      body,
     })
       .then((res) => res.json())
       .then((res) => onData(res))

@@ -31,7 +31,7 @@ module.exports = {
             }
           : {}),
       },
-      { page: page, limit: 10, sort: { dateAdded: -1 } }
+      { page: page, limit: 20, sort: { dateAdded: -1 } }
     )
       .then((assets) => res.json(assets))
       .catch((err) => res.status(422).json(err));

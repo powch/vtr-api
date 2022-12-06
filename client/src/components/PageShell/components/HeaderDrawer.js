@@ -6,31 +6,53 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   Divider,
 } from "@mui/material";
+import { Login, Logout, Person, Add } from "@mui/icons-material";
 
 const HeaderDrawer = ({ isOpen, handleClose }) => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={handleClose}>
       <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText>Account</ListItemText>
+        {isAuthenticated ? (
+          <>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText>Profile</ListItemText>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Add />
+                </ListItemIcon>
+                <ListItemText>Asset request</ListItemText>
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+          </>
+        ) : null}
+        <ListItem>
+          <ListItemButton
+            onClick={
+              isAuthenticated ? () => logout() : () => loginWithRedirect()
+            }
+          >
+            <ListItemIcon>
+              {isAuthenticated ? <Logout /> : <Login />}
+            </ListItemIcon>
+            <ListItemText>
+              {isAuthenticated ? "Log out" : "Log in"}
+            </ListItemText>
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemText>Asset request</ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <Divider />
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => loginWithRedirect()}>
-            <ListItemText>Log in</ListItemText>
-          </ListItemButton>
-        </ListItem>
+        {!isAuthenticated ? <Divider /> : null}
       </List>
     </Drawer>
   );
