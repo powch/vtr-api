@@ -10,7 +10,9 @@ const PageShell = ({ appState, children }) => {
   return (
     <>
       <HeaderBar appState={appState} />
-      <Container sx={{ pb: "4rem", pt: "1rem" }}>{children}</Container>
+      <Container sx={{ pb: "4rem", pt: "1rem", position: "relative" }}>
+        {children}
+      </Container>
       <BottomNav appState={appState} />
     </>
   );

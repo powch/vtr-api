@@ -4,6 +4,7 @@ export const initialState = {
   currentPage: INITIAL,
   user: null,
   assetList: [],
+  selectedAssetId: null,
 };
 
 export const reducer = (state, data) => {
@@ -41,6 +42,13 @@ export const reducer = (state, data) => {
       currentPage: ASSET_LIST,
       assetList: [...state?.assetList, ...docs],
       pagination,
+    };
+  }
+
+  if (action.includes("SELECT_ASSET_TO_VIEW")) {
+    return {
+      ...state,
+      selectedAssetId: payload,
     };
   }
 

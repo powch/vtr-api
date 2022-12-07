@@ -11,7 +11,13 @@ const HeaderBar = ({ appState }) => {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar
+          sx={{
+            maxWidth: "md",
+            mx: "auto",
+            width: "100%",
+          }}
+        >
           <Typography variant="h6" sx={{ mr: 2 }}>
             VTA
           </Typography>

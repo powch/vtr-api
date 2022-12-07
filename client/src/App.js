@@ -4,9 +4,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import jwt_decode from "jwt-decode";
 import { Box } from "@mui/material";
 
-import { ASSET_LIST, ASSET_LIST_LOADING } from "./constants";
+import { ASSET_LIST_LOADING } from "./constants";
 import PageShell from "./components/PageShell";
 import AssetList from "./components/AssetList";
+import AssetInfoPage from "./components/AssetInfoPage";
 
 import GetAssetData from "./rest/GetAssetData";
 
@@ -14,7 +15,7 @@ const App = ({ appState }) => {
   const { isLoading, isAuthenticated, getAccessTokenSilently, user } =
     useAuth0();
   const { state, dispatch } = appState;
-  const { currentPage, assetList } = state;
+  const { currentPage } = state;
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
@@ -33,10 +34,19 @@ const App = ({ appState }) => {
   }, [isLoading, isAuthenticated]);
 
   return (
-    <>
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        position: "relative",
+        maxWidth: "md",
+        mx: "auto",
+      }}
+    >
       <PageShell appState={appState}>
         <AssetList appState={appState} />
       </PageShell>
+      <AssetInfoPage appState={appState} />
       {currentPage === ASSET_LIST_LOADING ? (
         <GetAssetData
           state={state}
@@ -44,7 +54,7 @@ const App = ({ appState }) => {
           onError={(payload) => dispatch({ action: "ERROR", payload })}
         />
       ) : null}
-    </>
+    </Box>
   );
 };
 

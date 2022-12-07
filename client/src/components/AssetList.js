@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import { ASSET_LIST_LOADING } from "../constants";
 
-const AssetCard = ({ imageUrl, name, description, id, handleClick }) => {
+const AssetCard = ({ imageUrl, name, description, handleClick }) => {
   return (
     <Card sx={{ maxWidth: 150, marginBottom: "1rem" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia component="img" height={75} image={imageUrl} />
         <CardContent>
           <Typography gutterBottom variant="h6" fontSize={"0.75rem"}>
@@ -58,7 +58,7 @@ const AssetList = ({ appState }) => {
             name={asset.name}
             description={asset.description}
             id={asset._id}
-            handleClick={handleClick}
+            handleClick={() => handleClick(asset._id)}
           />
         ))}
       </Box>
