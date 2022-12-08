@@ -37,7 +37,7 @@ export const reducer = (state, data) => {
   if (action.includes("SEED_ASSET_DATA")) {
     const isAuthenticated = payload?.isAuthenticated;
     const { docs, ...pagination } = payload?.assetData || payload;
-    const { id, contributions, favorites } = payload?.userData || {};
+    const { id, contributions, favorites, likes } = payload?.userData || {};
 
     return {
       ...state,
@@ -51,9 +51,35 @@ export const reducer = (state, data) => {
               id,
               contributions,
               favorites,
+              likes,
             },
           }
         : {}),
+    };
+  }
+
+  if (action.includes("UPDATE_USER_ASSET_DATA")) {
+    const { userData } = payload;
+    const { contributions, favorites, likes } = userData;
+
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        contributions,
+        favorites,
+        likes,
+      },
+    };
+  }
+
+  if (action.includes("UPDATE_LIKES")) {
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        likes: [...state.user.likes, state.selectedAssetId],
+      },
     };
   }
 

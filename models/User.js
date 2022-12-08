@@ -6,16 +6,12 @@ const UserSchema = new mongoose.Schema({
     required: "User id is required",
   },
   displayName: {
-    type: String
+    type: String,
   },
   contributions: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Asset",
-    },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Gear",
     },
   ],
   favorites: [
@@ -23,16 +19,12 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Asset",
     },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Gear",
-    },
   ],
   likes: [
     {
       type: String
-    }
-  ]
+    },
+  ],
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -6,7 +6,7 @@ module.exports = {
       .then(async (newAsset) => {
         await db.User.findOneAndUpdate(
           { id: req.params.id },
-          { contributions: newAsset._id },
+          { $push: { contributions: newAsset._id } },
           { new: true }
         );
         return res.json(newAsset);

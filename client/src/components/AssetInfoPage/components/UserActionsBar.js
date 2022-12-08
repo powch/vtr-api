@@ -3,30 +3,53 @@ import { Grid, IconButton } from "@mui/material";
 import { ThumbUp, Favorite, Report } from "@mui/icons-material";
 
 const UserActionsBar = ({ appState }) => {
-  // GET ASSETID AND USERID OUT OF STATE FOR THE GET CALL
+  const { state, dispatch } = appState;
+  const { user, selectedAssetId } = state;
+  const { favorites, likes } = user;
+
+  const isAssetLiked = likes.find((id) => id === selectedAssetId);
+  const isAssetFavorited = favorites.find(
+    (asset) => asset._id === selectedAssetId
+  );
 
   const handleUpdateClick = (category) => {
-    fetch(`/api/data/${userId}`, {
+    const updateUserAndAssetData = (payload) => {
+      category === "likes"
+        ? dispatch({ action: "UPDATE_LIKES" })
+        : dispatch({ action: "UPDATE_USER_ASSET_DATA", payload });
+    };
+
+    const handleError = (payload) => dispatch({ action: "ERROR", payload });
+
+    fetch(`/api/data/${user.id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
       },
-      body: {
-        [category]: assetId,
-      },
+      body: JSON.stringify({
+        category,
+        assetId: selectedAssetId,
+      }),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => updateUserAndAssetData(res))
+      .catch((err) => handleError(err));
   };
 
   return (
     <>
       <Grid item xs={5}>
-        <IconButton sx={{ paddingLeft: 0 }}>
+        <IconButton
+          color={isAssetFavorited ? "primary" : "inherit"}
+          sx={{ paddingLeft: 0 }}
+          onClick={() => handleUpdateClick("favorites")}
+        >
           <Favorite />
         </IconButton>
-        <IconButton onClick={() => handleUpdateClick("likes")}>
+        <IconButton
+          color={isAssetLiked ? "primary" : "inherit"}
+          onClick={() => handleUpdateClick("likes")}
+        >
           <ThumbUp />
         </IconButton>
       </Grid>
