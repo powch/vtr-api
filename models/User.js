@@ -6,8 +6,7 @@ const UserSchema = new mongoose.Schema({
     required: "User id is required",
   },
   displayName: {
-    type: String,
-    required: "display name is required",
+    type: String
   },
   contributions: [
     {
@@ -29,6 +28,11 @@ const UserSchema = new mongoose.Schema({
       ref: "Gear",
     },
   ],
+  likes: [
+    {
+      type: String
+    }
+  ]
 });
 
 const User = mongoose.model("User", UserSchema);

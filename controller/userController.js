@@ -19,6 +19,17 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
+  findOneAndUpdate: async (req, res) => {
+    await db.User.findOneAndUpdate(
+      { id: req.params.id },
+      { [req.body.type]: req.body.id },
+      { new: true }
+    )
+      .populate(["contributions", "favorites"])
+      .then((updatedUser) => res.json(updatedUser))
+      .catch((err) => res.status(422).json(err));
+  },
+
   delete: (req, res) => {
     db.User.findOneAndDelete({ id: req.params.id })
       .then(() => res.status(204))

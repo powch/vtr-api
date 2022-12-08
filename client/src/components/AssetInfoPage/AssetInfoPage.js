@@ -17,7 +17,7 @@ import UserActionsBar from "./components/UserActionsBar";
 
 const AssetInfoPage = ({ appState }) => {
   const { state, dispatch } = appState;
-  const { selectedAssetId, assetList } = state;
+  const { selectedAssetId, assetList, user } = state;
   const { isAuthenticated } = useAuth0();
 
   const selectedAsset =
@@ -72,7 +72,7 @@ const AssetInfoPage = ({ appState }) => {
             />
           </Grid>
 
-          {isAuthenticated ? <UserActionsBar /> : null}
+          {isAuthenticated ? <UserActionsBar appState={appState} /> : null}
           <Grid
             item
             xs={12}

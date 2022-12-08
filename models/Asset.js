@@ -55,6 +55,10 @@ const AssetSchema = new mongoose.Schema({
     enum: ["APPROVED", "OPEN", "REVIEW"],
     required: "status is required",
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
   addedByUser: {
     type: String,
     ref: "User",

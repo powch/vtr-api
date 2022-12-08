@@ -50,7 +50,12 @@ const App = ({ appState }) => {
       {currentPage === ASSET_LIST_LOADING ? (
         <GetAssetData
           state={state}
-          onData={(payload) => dispatch({ action: "SEED_ASSET_DATA", payload })}
+          onData={(payload) =>
+            dispatch({
+              action: "SEED_ASSET_DATA",
+              payload: { ...payload, isAuthenticated },
+            })
+          }
           onError={(payload) => dispatch({ action: "ERROR", payload })}
         />
       ) : null}

@@ -35,13 +35,25 @@ export const reducer = (state, data) => {
   }
 
   if (action.includes("SEED_ASSET_DATA")) {
-    const { docs, ...pagination } = payload;
+    const isAuthenticated = payload?.isAuthenticated;
+    const { docs, ...pagination } = payload?.assetData || payload;
+    const { id, contributions, favorites } = payload?.userData || {};
 
     return {
       ...state,
       currentPage: ASSET_LIST,
       assetList: [...state?.assetList, ...docs],
       pagination,
+      ...(isAuthenticated
+        ? {
+            user: {
+              ...state.user,
+              id,
+              contributions,
+              favorites,
+            },
+          }
+        : {}),
     };
   }
 

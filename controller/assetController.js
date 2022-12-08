@@ -16,7 +16,7 @@ module.exports = {
 
   // search via regex with "name": {$regex: /foobar/, $options: 'i'}
   findAll: (req, res) => {
-    const { queryParams, page } = req.body;
+    const { queryParams } = req.body;
     const { searchParams } = queryParams || {};
 
     db.Asset.paginate(
@@ -31,7 +31,7 @@ module.exports = {
             }
           : {}),
       },
-      { page: page, limit: 20, sort: { dateAdded: -1 } }
+      { page: req.params.page, limit: 20, sort: { dateAdded: -1 } }
     )
       .then((assets) => res.json(assets))
       .catch((err) => res.status(422).json(err));

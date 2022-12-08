@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const assetController = require("../../controller/assetController");
 
-router.route("/").post(assetController.findAll);
+router.route("/:page").get(assetController.findAll);
 
 router
   .route("/:id")
