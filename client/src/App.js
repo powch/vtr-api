@@ -4,12 +4,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import jwt_decode from "jwt-decode";
 import { Box } from "@mui/material";
 
-import { ASSET_LIST_LOADING } from "./constants";
+import { ASSET_LIST_LOADING, ASSET_LIST_UPDATE_SORT_ORDER } from "./constants";
 import PageShell from "./components/PageShell";
 import AssetList from "./components/AssetList";
 import AssetInfoPage from "./components/AssetInfoPage";
 
 import GetAssetData from "./rest/GetAssetData";
+import GetSortedAssetData from "./rest/GetSortedAssetData";
 
 const App = ({ appState }) => {
   const { isLoading, isAuthenticated, getAccessTokenSilently, user } =
@@ -54,6 +55,18 @@ const App = ({ appState }) => {
             dispatch({
               action: "SEED_ASSET_DATA",
               payload: { ...payload, isAuthenticated },
+            })
+          }
+          onError={(payload) => dispatch({ action: "ERROR", payload })}
+        />
+      ) : null}
+      {currentPage === ASSET_LIST_UPDATE_SORT_ORDER ? (
+        <GetSortedAssetData
+          state={state}
+          onData={(payload) =>
+            dispatch({
+              action: "SORT_ORDER_UPDATED",
+              payload,
             })
           }
           onError={(payload) => dispatch({ action: "ERROR", payload })}

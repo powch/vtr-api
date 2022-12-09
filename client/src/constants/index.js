@@ -7,6 +7,6 @@ export const authAudience = "https://vtassets.com/api/";
 export const INITIAL = "initial";
 export const ASSET_LIST = "assetList";
 
-
 // Page loading states
 export const ASSET_LIST_LOADING = "assetList.loading";
+export const ASSET_LIST_UPDATE_SORT_ORDER = "assetList.updateSortOrder.loading";

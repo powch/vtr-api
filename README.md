@@ -1,2 +1,2 @@
-# vtr
+# VTAssets
  VTuber Resource app

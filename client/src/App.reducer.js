@@ -1,4 +1,9 @@
-import { INITIAL, ASSET_LIST_LOADING, ASSET_LIST } from "./constants";
+import {
+  INITIAL,
+  ASSET_LIST_LOADING,
+  ASSET_LIST,
+  ASSET_LIST_UPDATE_SORT_ORDER,
+} from "./constants";
 
 export const initialState = {
   currentPage: INITIAL,
@@ -61,11 +66,24 @@ export const reducer = (state, data) => {
 
   if (action.includes("UPDATE_SORT_ORDER")) {
     const isFavorite = payload.sortBy === "favorites";
+
     return {
       ...state,
-      currentPage: !isFavorite ? ASSET_LIST_LOADING : state.currentPage,
       sortBy: payload.sortBy,
-      assetList: isFavorite ? state.user.favorites : [],
+      ...(isFavorite
+        ? { assetList: state.user.favorites }
+        : { currentPage: ASSET_LIST_UPDATE_SORT_ORDER }),
+    };
+  }
+
+  if (action.includes("SORT_ORDER_UPDATED")) {
+    const { docs, ...pagination } = payload;
+
+    return {
+      ...state,
+      assetList: docs,
+      pagination,
+      currentPage: ASSET_LIST
     };
   }
 
