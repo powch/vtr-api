@@ -1,8 +1,23 @@
+const axios = require("axios");
 const db = require("../models");
 
 module.exports = {
-  create: (req, res) => {
-    db.Asset.create(req.body)
+  create: async (req, res) => {
+    const encodedImage = await axios({
+      url: req.body.image,
+      method: "get",
+      responseType: "arraybuffer",
+    })
+      .then((imageData) => {
+        const imageType = imageData.headers["content-type"];
+        const encodedString = Buffer.from(imageData.data).toString("base64");
+        return `data:${imageType};base64, ${encodedString}`;
+      })
+      .catch((err) => req.body.image);
+
+    const updatedBody = { ...req.body, image: encodedImage };
+
+    await db.Asset.create(updatedBody)
       .then(async (newAsset) => {
         await db.User.findOneAndUpdate(
           { id: req.params.id },
@@ -16,11 +31,10 @@ module.exports = {
 
   // search via regex with "name": {$regex: /foobar/, $options: 'i'}
   findAll: (req, res) => {
-    const { page, sortBy } = req.params;
+    const { page, sortBy, searchParams } = req.params;
 
     db.Asset.paginate(
       {
-        ...queryParams,
         ...(searchParams
           ? {
               [searchParams.type]: {
