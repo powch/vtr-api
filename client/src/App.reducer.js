@@ -5,6 +5,7 @@ export const initialState = {
   user: null,
   assetList: [],
   selectedAssetId: null,
+  sortBy: "dateAdded",
 };
 
 export const reducer = (state, data) => {
@@ -58,6 +59,16 @@ export const reducer = (state, data) => {
     };
   }
 
+  if (action.includes("UPDATE_SORT_ORDER")) {
+    const isFavorite = payload.sortBy === "favorites";
+    return {
+      ...state,
+      currentPage: !isFavorite ? ASSET_LIST_LOADING : state.currentPage,
+      sortBy: payload.sortBy,
+      assetList: isFavorite ? state.user.favorites : [],
+    };
+  }
+
   if (action.includes("UPDATE_USER_ASSET_DATA")) {
     const { userData } = payload;
     const { contributions, favorites, likes } = userData;
@@ -74,11 +85,15 @@ export const reducer = (state, data) => {
   }
 
   if (action.includes("UPDATE_LIKES")) {
+    const updatedLikes = payload.isAssetLiked
+      ? state.user.likes.filter((id) => id !== state.selectedAssetId)
+      : [...state.user.likes, state.selectedAssetId];
+
     return {
       ...state,
       user: {
         ...state.user,
-        likes: [...state.user.likes, state.selectedAssetId],
+        likes: updatedLikes,
       },
     };
   }

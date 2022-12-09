@@ -10,7 +10,7 @@ const HeaderBar = ({ appState }) => {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar color="transparent" position="fixed">
         <Toolbar
           sx={{
             maxWidth: "md",
@@ -28,7 +28,7 @@ const HeaderBar = ({ appState }) => {
             startAdornment={<SearchIcon />}
           />
           <IconButton onClick={() => setIsOpen(true)} sx={{ ml: 2 }}>
-            <MenuIcon />
+            <MenuIcon color="primary" />
           </IconButton>
         </Toolbar>
       </AppBar>

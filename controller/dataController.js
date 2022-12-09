@@ -21,17 +21,20 @@ module.exports = {
   },
 
   updateUserArrays: async (req, res) => {
-    await db.User.findOneAndUpdate(
-      { id: req.params.id },
-      { $push: { [req.body.category]: req.body.assetId } },
-      { new: true }
-    )
+    const { updateAction, category, assetId } = req.body;
+
+    const update =
+      updateAction === "add"
+        ? { $push: { [category]: assetId } }
+        : { $pull: { [category]: assetId } };
+
+    await db.User.findOneAndUpdate({ id: req.params.id }, update, { new: true })
       .populate(["contributions", "favorites"])
       .then(async (updatedUser) => {
-        if (req.body.category === "likes") {
+        if (category === "likes") {
           await db.Asset.findOneAndUpdate(
-            { _id: req.body.assetId },
-            { $inc: { likes: req.body.category === "likes" ? 1 : 0 } }
+            { _id: assetId },
+            { $inc: { likes: updateAction === "add" ? 1 : -1 } }
           ).catch((err) => res.status(422).json(err));
         }
 

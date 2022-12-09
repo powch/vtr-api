@@ -15,8 +15,11 @@ const UserActionsBar = ({ appState }) => {
   const handleUpdateClick = (category) => {
     const updateUserAndAssetData = (payload) => {
       category === "likes"
-        ? dispatch({ action: "UPDATE_LIKES" })
-        : dispatch({ action: "UPDATE_USER_ASSET_DATA", payload });
+        ? dispatch({ action: "UPDATE_LIKES", payload: { isAssetLiked } })
+        : dispatch({
+            action: "UPDATE_USER_ASSET_DATA",
+            payload,
+          });
     };
 
     const handleError = (payload) => dispatch({ action: "ERROR", payload });
@@ -27,6 +30,11 @@ const UserActionsBar = ({ appState }) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
+        updateAction:
+          (isAssetFavorited && category === "favorites") ||
+          (isAssetLiked && category === "likes")
+            ? "remove"
+            : "add",
         category,
         assetId: selectedAssetId,
       }),
@@ -56,7 +64,7 @@ const UserActionsBar = ({ appState }) => {
       <Grid item xs></Grid>
       <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
         <IconButton sx={{ pr: 0 }}>
-          <Report />
+          <Report color={"inherit"} />
         </IconButton>
       </Grid>
     </>
