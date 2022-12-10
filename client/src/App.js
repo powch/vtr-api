@@ -4,10 +4,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 import jwt_decode from "jwt-decode";
 import { Box } from "@mui/material";
 
-import { ASSET_LIST_LOADING, ASSET_LIST_UPDATE_SORT_ORDER } from "./constants";
+import {
+  ASSET_LIST_LOADING,
+  ASSET_LIST_UPDATE_SORT_ORDER,
+  REQUEST_FORM,
+} from "./constants";
 import PageShell from "./components/PageShell";
 import AssetList from "./components/AssetList";
 import AssetInfoPage from "./components/AssetInfoPage";
+import RequestForm from "./components/RequestForm";
 
 import GetAssetData from "./rest/GetAssetData";
 import GetSortedAssetData from "./rest/GetSortedAssetData";
@@ -48,6 +53,7 @@ const App = ({ appState }) => {
         <AssetList appState={appState} />
       </PageShell>
       <AssetInfoPage appState={appState} />
+      <RequestForm appState={appState} />
       {currentPage === ASSET_LIST_LOADING ? (
         <GetAssetData
           state={state}

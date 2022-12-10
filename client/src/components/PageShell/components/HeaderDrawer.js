@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Login, Logout, Person, Add } from "@mui/icons-material";
 
-const HeaderDrawer = ({ isOpen, handleClose }) => {
+const HeaderDrawer = ({ isOpen, handleClose, handleRequestClick }) => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   return (
@@ -22,15 +22,15 @@ const HeaderDrawer = ({ isOpen, handleClose }) => {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <Person />
+                  <Person color="primary" />
                 </ListItemIcon>
                 <ListItemText>Profile</ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton>
+              <ListItemButton onClick={handleRequestClick}>
                 <ListItemIcon>
-                  <Add />
+                  <Add color="primary" />
                 </ListItemIcon>
                 <ListItemText>Asset request</ListItemText>
               </ListItemButton>
@@ -45,7 +45,11 @@ const HeaderDrawer = ({ isOpen, handleClose }) => {
             }
           >
             <ListItemIcon>
-              {isAuthenticated ? <Logout /> : <Login />}
+              {isAuthenticated ? (
+                <Logout color="primary" />
+              ) : (
+                <Login color="primary" />
+              )}
             </ListItemIcon>
             <ListItemText>
               {isAuthenticated ? "Log out" : "Log in"}

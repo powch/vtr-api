@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { IconButton, AppBar, Toolbar, Input, Typography } from "@mui/material";
 import { Menu as MenuIcon, Search as SearchIcon } from "@mui/icons-material";
 
+import { REQUEST_FORM } from "../../../constants";
 import HeaderDrawer from "./HeaderDrawer";
 
 const HeaderBar = ({ appState }) => {
   const { state, dispatch } = appState;
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleRequestClick = () => {
+    dispatch({action: "CHANGE_PAGE", payload: REQUEST_FORM})
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -34,7 +40,11 @@ const HeaderBar = ({ appState }) => {
       </AppBar>
       <Toolbar />
 
-      <HeaderDrawer isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+      <HeaderDrawer
+        isOpen={isOpen}
+        handleClose={() => setIsOpen(false)}
+        handleRequestClick={handleRequestClick}
+      />
     </>
   );
 };

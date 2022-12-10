@@ -3,6 +3,7 @@ import {
   ASSET_LIST_LOADING,
   ASSET_LIST,
   ASSET_LIST_UPDATE_SORT_ORDER,
+  ASSET_INFO,
 } from "./constants";
 
 export const initialState = {
@@ -83,7 +84,7 @@ export const reducer = (state, data) => {
       ...state,
       assetList: docs,
       pagination,
-      currentPage: ASSET_LIST
+      currentPage: ASSET_LIST,
     };
   }
 
@@ -120,6 +121,7 @@ export const reducer = (state, data) => {
     return {
       ...state,
       selectedAssetId: payload,
+      currentPage: ASSET_INFO,
     };
   }
 

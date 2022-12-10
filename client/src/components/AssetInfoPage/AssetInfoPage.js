@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 import { Close, OpenInNew } from "@mui/icons-material";
 
-import CloseActionBar from "./components/CloseActionBar";
+import { ASSET_LIST, ASSET_INFO } from "../../constants";
 import ArtistActionBar from "./components/ArtistActionBar";
 import UserActionsBar from "./components/UserActionsBar";
+import SlideModal from "../SlideModal";
 
 const AssetInfoPage = ({ appState }) => {
   const { state, dispatch } = appState;
-  const { selectedAssetId, assetList, user } = state;
+  const { selectedAssetId, assetList, currentPage } = state;
   const { isAuthenticated } = useAuth0();
 
   const selectedAsset =
@@ -33,76 +34,49 @@ const AssetInfoPage = ({ appState }) => {
     price,
   } = selectedAsset;
 
-  return (
-    <Slide
-      in={selectedAssetId ? true : false}
-      direction="left"
-      mountOnEnter
-      unmountOnExit
-    >
-      <Box
-        sx={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 1000,
-          backgroundColor: "#fff",
-          padding: "4rem 2rem",
-          maxWidth: "md",
-          mx: "auto",
-        }}
-      >
-        <Grid container justifyContent={"center"} alignItems={"flex-start"}>
-          <CloseActionBar
-            handleClose={() =>
-              dispatch({ action: "SELECT_ASSET_TO_VIEW", payload: null })
-            }
-          />
-          <ArtistActionBar artist={artist} artistLink={artistLink} />
-          <Grid
-            item
-            xs={12}
-            sx={{ ...(!isAuthenticated ? { mb: "0.5rem" } : {}) }}
-          >
-            <img
-              src={imageUrl}
-              width="100%"
-              style={{ borderRadius: "0.25rem" }}
-            />
-          </Grid>
+  const handleClose = () =>
+    dispatch({ action: "CHANGE_PAGE", payload: ASSET_LIST });
 
-          {isAuthenticated ? <UserActionsBar appState={appState} /> : null}
-          <Grid
-            item
-            xs={12}
-            sx={{ mb: "0.5rem", ...(isAuthenticated ? { mt: "1rem" } : {}) }}
-          >
-            <Typography variant="h6" lineHeight={1} fontWeight="bold">
-              {name}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} mb={"3rem"}>
-            <Typography variant="subtitle2" lineHeight={1}>
-              {description}
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              color="primary"
-              fullWidth
-              variant="contained"
-              endIcon={<OpenInNew />}
-              href={link}
-              target={"_blank"}
-              rel="noopener"
-            >
-              Go to asset
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-    </Slide>
+  return (
+    <SlideModal
+      appState={appState}
+      mounted={currentPage === ASSET_INFO}
+      handleClose={handleClose}
+    >
+      <ArtistActionBar artist={artist} artistLink={artistLink} />
+      <Grid item xs={12} sx={{ ...(!isAuthenticated ? { mb: "0.5rem" } : {}) }}>
+        <img src={imageUrl} width="100%" style={{ borderRadius: "0.25rem" }} />
+      </Grid>
+
+      {isAuthenticated ? <UserActionsBar appState={appState} /> : null}
+      <Grid
+        item
+        xs={12}
+        sx={{ mb: "0.5rem", ...(isAuthenticated ? { mt: "1rem" } : {}) }}
+      >
+        <Typography variant="h6" lineHeight={1} fontWeight="bold">
+          {name}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} mb={"3rem"}>
+        <Typography variant="subtitle2" lineHeight={1}>
+          {description}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          fullWidth
+          variant="contained"
+          endIcon={<OpenInNew />}
+          href={link}
+          target={"_blank"}
+          rel="noopener"
+        >
+          Go to asset
+        </Button>
+      </Grid>
+    </SlideModal>
   );
 };
 
