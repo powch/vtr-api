@@ -4,7 +4,8 @@ import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { Whatshot, NewReleases, Favorite } from "@mui/icons-material";
 
 const BottomNav = ({ appState }) => {
-  const { dispatch } = appState;
+  const { dispatch, state } = appState;
+  const { sortBy } = state;
   const { isAuthenticated } = useAuth0();
 
   const handleSortClick = (newSort) =>
@@ -15,22 +16,25 @@ const BottomNav = ({ appState }) => {
       variant="outlined"
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
     >
-      <BottomNavigation showLabels>
+      <BottomNavigation value={sortBy} showLabels>
         <BottomNavigationAction
           onClick={() => handleSortClick("dateAdded")}
           label="New"
-          icon={<NewReleases color="primary" />}
+          icon={<NewReleases />}
+          value={"dateAdded"}
         />
         <BottomNavigationAction
           onClick={() => handleSortClick("likes")}
           label="Hot"
-          icon={<Whatshot color="primary" />}
+          icon={<Whatshot />}
+          value={"likes"}
         />
         {isAuthenticated ? (
           <BottomNavigationAction
             onClick={() => handleSortClick("favorites")}
             label="Faves"
-            icon={<Favorite color="primary" />}
+            icon={<Favorite />}
+            value={"favorites"}
           />
         ) : null}
       </BottomNavigation>

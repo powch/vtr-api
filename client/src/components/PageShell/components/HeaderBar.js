@@ -10,13 +10,13 @@ const HeaderBar = ({ appState }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleRequestClick = () => {
-    dispatch({action: "CHANGE_PAGE", payload: REQUEST_FORM})
+    dispatch({ action: "CHANGE_PAGE", payload: REQUEST_FORM });
     setIsOpen(false);
   };
 
   return (
     <>
-      <AppBar color="transparent" position="fixed">
+      <AppBar sx={{ backgroundColor: "#fff" }} position="fixed">
         <Toolbar
           sx={{
             maxWidth: "md",
@@ -24,7 +24,7 @@ const HeaderBar = ({ appState }) => {
             width: "100%",
           }}
         >
-          <Typography variant="h6" sx={{ mr: 2 }}>
+          <Typography variant="h6" sx={{ mr: 2, color: "#30475E" }}>
             VTA
           </Typography>
           <Input

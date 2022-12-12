@@ -1,13 +1,17 @@
 import React from "react";
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { ThumbUp, Favorite, Report } from "@mui/icons-material";
 
 const UserActionsBar = ({ appState }) => {
   const { state, dispatch } = appState;
-  const { user, selectedAssetId } = state;
-  const { favorites, likes } = user;
+  const { user, selectedAssetId, assetList } = state;
+  const { favorites, likes: userLikes } = user;
+  const selectedAsset = assetList.find(
+    (asset) => asset._id === selectedAssetId
+  );
+  const { likes: assetLikes } = selectedAsset;
 
-  const isAssetLiked = likes.find((id) => id === selectedAssetId);
+  const isAssetLiked = userLikes.find((id) => id === selectedAssetId);
   const isAssetFavorited = favorites.find(
     (asset) => asset._id === selectedAssetId
   );
@@ -46,25 +50,41 @@ const UserActionsBar = ({ appState }) => {
 
   return (
     <>
-      <Grid item xs={5}>
+      <Grid
+        item
+        xs={5}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          color: "primary",
+        }}
+      >
         <IconButton
-          color={isAssetFavorited ? "primary" : "inherit"}
+          color={isAssetFavorited ? "primary" : "disabled"}
           sx={{ paddingLeft: 0 }}
           onClick={() => handleUpdateClick("favorites")}
         >
           <Favorite />
         </IconButton>
         <IconButton
-          color={isAssetLiked ? "primary" : "inherit"}
+          color={isAssetLiked ? "primary" : "disabled"}
           onClick={() => handleUpdateClick("likes")}
         >
           <ThumbUp />
         </IconButton>
+        {assetLikes > 0 ? (
+          <Typography
+            variant="caption"
+            fontWeight="bold"
+            sx={{ color: "#30475E" }}
+          >{`(${assetLikes})`}</Typography>
+        ) : null}
       </Grid>
       <Grid item xs></Grid>
       <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <IconButton sx={{ pr: 0 }}>
-          <Report color={"inherit"} />
+        <IconButton color={"disabled"} sx={{ pr: 0 }}>
+          <Report />
         </IconButton>
       </Grid>
     </>

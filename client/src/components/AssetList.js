@@ -10,17 +10,24 @@ import {
 } from "@mui/material";
 import { ASSET_LIST_LOADING } from "../constants";
 
+import { truncateString } from "../App.utils";
+
 const AssetCard = ({ imageUrl, name, description, handleClick }) => {
   return (
-    <Card sx={{ maxWidth: 150, marginBottom: "1rem" }}>
+    <Card sx={{ maxWidth: 300, marginBottom: "1rem" }}>
       <CardActionArea onClick={handleClick}>
-        <CardMedia component="img" height={75} image={imageUrl} />
+        <CardMedia component="img" height={150} image={imageUrl} />
         <CardContent>
-          <Typography gutterBottom variant="h6" fontSize={"0.75rem"}>
-            {name}
+          <Typography
+            gutterBottom
+            variant="h6"
+            fontSize={"1rem"}
+            lineHeight={"1.2"}
+          >
+            {truncateString(name, 75)}
           </Typography>
-          <Typography variant="body2" fontSize={"0.5rem"}>
-            {description}
+          <Typography variant="body2" fontSize={"0.75rem"} lineHeight={"1.2"}>
+            {truncateString(description, 75)}
           </Typography>
         </CardContent>
       </CardActionArea>

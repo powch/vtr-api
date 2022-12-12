@@ -36,6 +36,7 @@ const SlideModal = ({ appState, children, mounted, handleClose }) => {
           padding: "4rem 2rem",
           maxWidth: "md",
           mx: "auto",
+          overflowY: "auto",
         }}
       >
         <Grid container justifyContent={"center"} alignItems={"flex-start"}>

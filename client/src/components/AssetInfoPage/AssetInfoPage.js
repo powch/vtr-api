@@ -1,15 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  Box,
-  Slide,
-  Grid,
-  Button,
-  IconButton,
-  Typography,
-  Paper,
-} from "@mui/material";
-import { Close, OpenInNew } from "@mui/icons-material";
+import { Grid, Button, Typography, Paper } from "@mui/material";
+import { OpenInNew } from "@mui/icons-material";
 
 import { ASSET_LIST, ASSET_INFO } from "../../constants";
 import ArtistActionBar from "./components/ArtistActionBar";
@@ -45,7 +37,11 @@ const AssetInfoPage = ({ appState }) => {
     >
       <ArtistActionBar artist={artist} artistLink={artistLink} />
       <Grid item xs={12} sx={{ ...(!isAuthenticated ? { mb: "0.5rem" } : {}) }}>
-        <img src={imageUrl} width="100%" style={{ borderRadius: "0.25rem" }} />
+        <img
+          src={imageUrl}
+          width="100%"
+          style={{ borderRadius: "0.25rem" }}
+        />
       </Grid>
 
       {isAuthenticated ? <UserActionsBar appState={appState} /> : null}
@@ -68,7 +64,7 @@ const AssetInfoPage = ({ appState }) => {
           color="primary"
           fullWidth
           variant="contained"
-          endIcon={<OpenInNew />}
+          startIcon={<OpenInNew />}
           href={link}
           target={"_blank"}
           rel="noopener"
