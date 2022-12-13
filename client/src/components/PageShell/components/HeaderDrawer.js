@@ -9,9 +9,14 @@ import {
   ListItemIcon,
   Divider,
 } from "@mui/material";
-import { Login, Logout, Person, Add } from "@mui/icons-material";
+import { Login, Logout, Person, Add, Dashboard } from "@mui/icons-material";
 
-const HeaderDrawer = ({ isOpen, handleClose, handleRequestClick }) => {
+const HeaderDrawer = ({
+  isOpen,
+  handleClose,
+  handleRequestClick,
+  isUserAdmin,
+}) => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   return (
@@ -36,6 +41,19 @@ const HeaderDrawer = ({ isOpen, handleClose, handleRequestClick }) => {
               </ListItemButton>
             </ListItem>
             <Divider />
+            {isUserAdmin ? (
+              <>
+                <ListItem>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <Dashboard color="primary" />
+                    </ListItemIcon>
+                    <ListItemText>Admin dashboard</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </>
+            ) : null}
           </>
         ) : null}
         <ListItem>

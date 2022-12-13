@@ -7,6 +7,7 @@ import HeaderDrawer from "./HeaderDrawer";
 
 const HeaderBar = ({ appState }) => {
   const { state, dispatch } = appState;
+  const { user } = state;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleRequestClick = () => {
@@ -42,6 +43,7 @@ const HeaderBar = ({ appState }) => {
 
       <HeaderDrawer
         isOpen={isOpen}
+        isUserAdmin={user?.role === "admin"}
         handleClose={() => setIsOpen(false)}
         handleRequestClick={handleRequestClick}
       />

@@ -15,7 +15,7 @@ import Placeholder from "./components/Placeholder";
 
 const AssetCard = ({ imageUrl, name, description, handleClick }) => {
   return (
-    <Card sx={{ maxWidth: 300, marginBottom: "1rem" }}>
+    <Card sx={{ maxWidth: 300, mb: "1.25rem" }}>
       <CardActionArea onClick={handleClick}>
         <CardMedia component="img" height={150} image={imageUrl} />
         <CardContent>
