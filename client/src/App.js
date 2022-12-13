@@ -4,11 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import jwt_decode from "jwt-decode";
 import { Box } from "@mui/material";
 
-import {
-  ASSET_LIST_LOADING,
-  ASSET_LIST_UPDATE_SORT_ORDER,
-  REQUEST_FORM,
-} from "./constants";
+import { ASSET_LIST_LOADING, ASSET_LIST_UPDATE_SORT_ORDER } from "./constants";
 import PageShell from "./components/PageShell";
 import AssetList from "./components/AssetList";
 import AssetInfoPage from "./components/AssetInfoPage";

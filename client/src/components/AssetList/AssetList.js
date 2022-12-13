@@ -8,9 +8,10 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { ASSET_LIST_LOADING } from "../constants";
+import { ASSET_LIST_LOADING } from "../../constants";
 
-import { truncateString } from "../App.utils";
+import { truncateString } from "../../App.utils";
+import Placeholder from "./components/Placeholder";
 
 const AssetCard = ({ imageUrl, name, description, handleClick }) => {
   return (
@@ -37,7 +38,7 @@ const AssetCard = ({ imageUrl, name, description, handleClick }) => {
 
 const AssetList = ({ appState }) => {
   const { dispatch, state } = appState;
-  const { assetList, pagination } = state;
+  const { assetList, pagination, sortBy } = state;
   const { nextPage } = pagination || {};
 
   const handleClick = (id) =>
@@ -48,32 +49,38 @@ const AssetList = ({ appState }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          marginTop: "0.5rem",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          width: "100%",
-          flexWrap: "wrap",
-        }}
-      >
-        {assetList?.map((asset, idx) => (
-          <AssetCard
-            key={idx}
-            imageUrl={asset.image}
-            name={asset.name}
-            description={asset.description}
-            id={asset._id}
-            handleClick={() => handleClick(asset._id)}
-          />
-        ))}
-      </Box>
-      {nextPage ? (
-        <Button variant="text" fullWidth onClick={handleLoadMore}>
-          Load more assets
-        </Button>
-      ) : null}
+      {sortBy === "favorites" && assetList.length === 0 ? (
+        <Placeholder />
+      ) : (
+        <>
+          <Box
+            sx={{
+              marginTop: "0.5rem",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              width: "100%",
+              flexWrap: "wrap",
+            }}
+          >
+            {assetList?.map((asset, idx) => (
+              <AssetCard
+                key={idx}
+                imageUrl={asset.image}
+                name={asset.name}
+                description={asset.description}
+                id={asset._id}
+                handleClick={() => handleClick(asset._id)}
+              />
+            ))}
+          </Box>
+          {nextPage ? (
+            <Button variant="text" fullWidth onClick={handleLoadMore}>
+              Load more assets
+            </Button>
+          ) : null}
+        </>
+      )}
     </>
   );
 };
