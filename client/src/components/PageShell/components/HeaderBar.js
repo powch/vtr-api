@@ -20,7 +20,7 @@ const HeaderBar = ({ appState }) => {
       <AppBar sx={{ backgroundColor: "#fff" }} position="fixed">
         <Toolbar
           sx={{
-            maxWidth: "md",
+            maxWidth: "lg",
             mx: "auto",
             width: "100%",
           }}

@@ -62,7 +62,6 @@ const UserActionsBar = ({ appState }) => {
       >
         <IconButton
           color={isAssetFavorited ? "primary" : "disabled"}
-          sx={{ paddingLeft: 0 }}
           onClick={() => handleUpdateClick("favorites")}
         >
           <Favorite />
@@ -83,7 +82,7 @@ const UserActionsBar = ({ appState }) => {
       </Grid>
       <Grid item xs></Grid>
       <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <IconButton color={"disabled"} sx={{ pr: 0 }}>
+        <IconButton color={"disabled"}>
           <Report />
         </IconButton>
       </Grid>

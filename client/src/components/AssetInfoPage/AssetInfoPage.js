@@ -37,11 +37,7 @@ const AssetInfoPage = ({ appState }) => {
     >
       <ArtistActionBar artist={artist} artistLink={artistLink} />
       <Grid item xs={12} sx={{ ...(!isAuthenticated ? { mb: "0.5rem" } : {}) }}>
-        <img
-          src={imageUrl}
-          width="100%"
-          style={{ borderRadius: "0.25rem" }}
-        />
+        <img src={imageUrl} width="100%" style={{ borderRadius: "0.25rem" }} />
       </Grid>
 
       {isAuthenticated ? <UserActionsBar appState={appState} /> : null}
@@ -59,19 +55,39 @@ const AssetInfoPage = ({ appState }) => {
           {description}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={0} md={3}></Grid>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Button
           color="primary"
-          fullWidth
           variant="contained"
+          fullWidth
           startIcon={<OpenInNew />}
           href={link}
           target={"_blank"}
           rel="noopener"
+          sx={{ mb: 2, maxWidth: "md" }}
         >
           Go to asset
         </Button>
+        <Button
+          fullWidth
+          color="primary"
+          variant="outlined"
+          onClick={handleClose}
+          sx={{ maxWidth: "md" }}
+        >
+          Close
+        </Button>
       </Grid>
+      <Grid item xs={0} md={3}></Grid>
     </SlideModal>
   );
 };

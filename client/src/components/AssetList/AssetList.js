@@ -15,7 +15,7 @@ import Placeholder from "./components/Placeholder";
 
 const AssetCard = ({ imageUrl, name, description, handleClick }) => {
   return (
-    <Card sx={{ maxWidth: 300, mb: "1.25rem" }}>
+    <Card sx={{ maxWidth: { xs: 300, sm: 250 }, mb: "1.25rem" }}>
       <CardActionArea onClick={handleClick}>
         <CardMedia component="img" height={150} image={imageUrl} />
         <CardContent>
@@ -74,7 +74,7 @@ const AssetList = ({ appState }) => {
               />
             ))}
           </Box>
-          {nextPage ? (
+          {nextPage && sortBy !== "favorites" ? (
             <Button variant="text" fullWidth onClick={handleLoadMore}>
               Load more assets
             </Button>

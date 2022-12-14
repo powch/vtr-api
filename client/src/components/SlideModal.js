@@ -14,8 +14,14 @@ const CloseActionBar = ({ handleClose }) => (
         mb: "1rem",
       }}
     >
-      <IconButton sx={{ pr: 0 }} onClick={handleClose}>
-        <Close color="primary" />
+      <IconButton onClick={handleClose}>
+        <Close
+          color="primary"
+          sx={{
+            height: { xs: "1.25em", md: "1.5em" },
+            width: { xs: "1.25em", md: "1.5em" },
+          }}
+        />
       </IconButton>
     </Grid>
   </>
@@ -33,8 +39,8 @@ const SlideModal = ({ appState, children, mounted, handleClose }) => {
           height: "100%",
           zIndex: 1000,
           backgroundColor: "#fff",
-          padding: "4rem 2rem",
-          maxWidth: "md",
+          padding: { xs: "4rem 2rem", sm: "6rem 2rem" },
+          maxWidth: "lg",
           mx: "auto",
           overflowY: "auto",
         }}

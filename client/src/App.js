@@ -41,7 +41,7 @@ const App = ({ appState }) => {
         height: "100vh",
         width: "100%",
         position: "relative",
-        maxWidth: "md",
+        maxWidth: "lg",
         mx: "auto",
       }}
     >

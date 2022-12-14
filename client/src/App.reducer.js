@@ -51,7 +51,7 @@ export const reducer = (state, data) => {
       currentPage: ASSET_LIST,
       assetList: [...state?.assetList, ...docs],
       pagination,
-      ...(isAuthenticated
+      ...(isAuthenticated && payload?.userData
         ? {
             user: {
               ...state.user,
