@@ -43,8 +43,6 @@ const SlideModal = ({ appState, children, mounted, handleClose }) => {
           maxWidth: "lg",
           mx: "auto",
           overflowY: "auto",
-          display: "flex",
-          justifyContent: "center",
         }}
       >
         <Grid
@@ -52,6 +50,7 @@ const SlideModal = ({ appState, children, mounted, handleClose }) => {
           maxWidth={"md"}
           justifyContent={"center"}
           alignItems={"flex-start"}
+          sx={{ mx: "auto" }}
         >
           <CloseActionBar handleClose={handleClose} />
           {children}

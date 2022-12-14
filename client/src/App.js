@@ -44,8 +44,6 @@ const App = ({ appState }) => {
         position: "relative",
         maxWidth: "lg",
         mx: "auto",
-        display: "flex",
-        flexDirection: "column",
       }}
     >
       <PageShell appState={appState}>
