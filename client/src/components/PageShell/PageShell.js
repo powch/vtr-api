@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
+import { Container, Box } from "@mui/material";
 
 import HeaderBar from "./components/HeaderBar";
 import BottomNav from "./components/BottomNav";
@@ -11,28 +11,26 @@ const PageShell = ({ appState, children }) => {
   return (
     <>
       <HeaderBar appState={appState} />
-      <Container
+      <Box
         sx={{
-          pb: "4rem",
-          pt: "1rem",
-          position: "relative",
+          height: "95%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
         }}
       >
-        <Grid container>
-          <Grid
-            item
-            xs={0}
-            sm={0}
-            md={3}
-            sx={{ borderRight: "0.063rem solid rgb(0,0,0,0.26)" }}
-          >
-            <LeftNav appState={appState} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={9}>
-            {children}
-          </Grid>
-        </Grid>
-      </Container>
+        <LeftNav appState={appState} />
+        <Container
+          sx={{
+            pb: "4rem",
+            pt: "1rem",
+            position: "relative",
+            overflowY: "auto",
+          }}
+        >
+          {children}
+        </Container>
+      </Box>
       <BottomNav appState={appState} />
     </>
   );

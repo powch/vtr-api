@@ -18,7 +18,15 @@ const LeftNav = ({ appState }) => {
     dispatch({ action: "UPDATE_SORT_ORDER", payload: { sortBy: newSort } });
 
   return (
-    <List sx={{ display: { xs: "none", md: "block" } }}>
+    <List
+      sx={{
+        display: { xs: "none", md: "block" },
+        position: "sticky",
+        top: 0,
+        left: 0,
+        borderRight: "0.063rem solid rgb(0,0,0,0.26)",
+      }}
+    >
       <ListItem>
         <ListItemButton
           selected={sortBy === "dateAdded"}

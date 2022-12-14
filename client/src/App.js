@@ -39,10 +39,13 @@ const App = ({ appState }) => {
     <Box
       sx={{
         height: "100vh",
+        maxHeight: "100vh",
         width: "100%",
         position: "relative",
         maxWidth: "lg",
         mx: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <PageShell appState={appState}>
