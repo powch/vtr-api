@@ -35,7 +35,7 @@ const AssetInfoPage = ({ appState }) => {
       mounted={currentPage === ASSET_INFO}
       handleClose={handleClose}
     >
-      <ArtistActionBar artist={artist} artistLink={artistLink} />
+      {/* <ArtistActionBar artist={artist} artistLink={artistLink} /> */}
       <Grid item xs={12} sx={{ ...(!isAuthenticated ? { mb: "0.5rem" } : {}) }}>
         <img src={imageUrl} width="100%" style={{ borderRadius: "0.25rem" }} />
       </Grid>
