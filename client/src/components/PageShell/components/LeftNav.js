@@ -12,7 +12,7 @@ import { Whatshot, NewReleases, Favorite } from "@mui/icons-material";
 
 const LeftNav = ({ appState }) => {
   const { state, dispatch } = appState;
-  const { sortBy } = state;
+  const { sortBy, user } = state;
 
   const handleSortClick = (newSort) =>
     dispatch({ action: "UPDATE_SORT_ORDER", payload: { sortBy: newSort } });
@@ -53,19 +53,21 @@ const LeftNav = ({ appState }) => {
         </ListItemButton>
       </ListItem>
 
-      <ListItem>
-        <ListItemButton
-          selected={sortBy === "favorites"}
-          onClick={() => handleSortClick("favorites")}
-        >
-          <ListItemIcon>
-            <Favorite
-              {...(sortBy === "favorites" ? { color: "primary" } : {})}
-            />
-          </ListItemIcon>
-          <ListItemText primary={"Favorites"} />
-        </ListItemButton>
-      </ListItem>
+      {user ? (
+        <ListItem>
+          <ListItemButton
+            selected={sortBy === "favorites"}
+            onClick={() => handleSortClick("favorites")}
+          >
+            <ListItemIcon>
+              <Favorite
+                {...(sortBy === "favorites" ? { color: "primary" } : {})}
+              />
+            </ListItemIcon>
+            <ListItemText primary={"Favorites"} />
+          </ListItemButton>
+        </ListItem>
+      ) : null}
     </List>
   );
 };

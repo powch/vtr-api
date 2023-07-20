@@ -25,15 +25,9 @@ const HeaderBar = ({ appState }) => {
             width: "100%",
           }}
         >
-          <Typography variant="h6" sx={{ mr: 2, color: "#30475E" }}>
+          <Typography variant="h6" sx={{ mr: "auto", color: "#30475E" }}>
             VTA
           </Typography>
-          <Input
-            fullWidth
-            margin="dense"
-            placeholder="Search"
-            startAdornment={<SearchIcon />}
-          />
           <IconButton onClick={() => setIsOpen(true)} sx={{ ml: 2 }}>
             <MenuIcon color="primary" />
           </IconButton>
